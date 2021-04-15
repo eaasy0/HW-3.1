@@ -2,11 +2,46 @@ package ru.netology.domain;
 
 public class Radio {
 
-    private int station = 0;
-    private int volume = 3;
+    private String radioName = "ROCKET";
+    private int station;
+    private short stationNumber = 10;
+    private int volume = 20;
+
+
+    public Radio() {
+    }
+
+    public Radio(int volume) {
+        if (volume > 100) {
+            return;
+        }
+        if (volume < 0) {
+            return;
+        }
+        this.volume = volume;
+    }
+    public Radio(short stationNumber) {
+        setStationNumber(stationNumber);
+    }
+
+    public Radio(String radioName, int station) {
+        this.radioName = radioName;
+        setStation(station);
+    }
+    public void setStationNumber(short stationNumber) {
+
+        if (stationNumber < 1) {
+            return;
+        }
+        this.stationNumber = stationNumber;
+    }
+
+    public short getStationNumber() {
+        return stationNumber;
+    }
 
     public void setStation(int station) {
-        if (station > 9) {
+        if (station > stationNumber) {
             return;
         }
         if (station < 0) {
@@ -19,34 +54,36 @@ public class Radio {
         this.volume = volume;
     }
 
+
+
     public void switchStationUp() {
-        if (station == 9) {
+        if (station == stationNumber) {
             setStation(0);
             return;
         }
-        setStation(station + 1);
+        setStation(++station);
     }
 
     public void switchStationDown() {
         if (station == 0) {
-            setStation(9);
+            setStation(stationNumber);
             return;
         }
-        setStation(station - 1);
+        setStation(--station);
     }
 
     public void upVolume() {
-        if (volume == 10) {
+        if (volume == 100) {
             return;
         }
-        setVolume(volume + 1);
+        setVolume(++volume);
     }
 
     public void downVolume() {
         if (volume == 0) {
             return;
         }
-        setVolume(volume - 1);
+        setVolume(--volume);
     }
 
     public int getVolume() {
